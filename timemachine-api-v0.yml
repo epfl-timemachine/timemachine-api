@@ -1,0 +1,726 @@
+openapi: 3.0.0
+info:
+  version: 0.0.1
+  title: Time Machine API
+  description: The API used for the Time Machine Project.
+servers:
+  - url: https://demo-timemachine.epfl.ch/api
+  - url: http://localhost:8088/api
+tags:
+  - name: Datasets
+    description: Endpoints related to datasets
+  - name: Points of Interest
+    description: Endpoints related to points of interest (POI)
+  - name: Observations
+    description: Endpoints related to observations
+  - name: Historical Records
+    description: Endpoints related to historical records
+  - name: Geometries
+    description: Endpoints related to geometries
+paths:
+  /datasets:
+    get:
+      tags:
+        - Datasets
+      summary: List all datasets
+      description: Retrieve a list of all datasets
+      responses:
+        '200':
+          description: A list of datasets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetsResponse'
+              example:
+                id: "http://localhost:8088/api/datasets?page=1"
+                total: 2
+                per_page: 100
+                current_page: 1
+                last_page: 1
+                next: null
+                previous: null
+                items:
+                  - uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
+                    dataset_id: "VENICE_GARZONI"
+                    rde_type: "dataset"
+                    description: "TODO"
+                    paradata: "TODO"
+                    time_range: 
+                      - "1575-01-01"
+                      - "1772-12-31"
+                    configuration: "garzoni_ds_configuration.json"
+                  - uuid: "29d8504f-52fc-56a3-b7b1-8960b2ebb1e0"
+                    dataset_id: "VENICE_1808_SOMMARIONI"
+                    rde_type: "dataset"
+                    description: "Digitisation of the 1808 Napoleonic cadaster of Venice. Contains both numeric facsimile of the cadatser map as well as their description in the written registry, called the \"Sommarioni\""
+                    paradata: "The textual data from the register was manually transcribed, then semi-automatically cleaned and normalized by various researchers. The maps were vetcorized into geometries through computer vision techniques and then manually corrected and expanded."
+                    time_range: 
+                      - "1808-01-01"
+                      - "1808-12-31"
+                    configuration: "sommarioni_ds_configuration.json"
+  /datasets/{uuid}:
+    get:
+      tags:
+        - Datasets
+      summary: Get a specific dataset
+      description: Retrieve a specific dataset by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the dataset to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The dataset details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+              example:
+                uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
+                dataset_id: "VENICE_GARZONI"
+                rde_type: "dataset"
+                description: "TODO"
+                paradata: "TODO"
+                time_range: 
+                  - "1575-01-01"
+                  - "1772-12-31"
+                configuration: "garzoni_ds_configuration.json"
+        '404':
+          description: Dataset not found
+  /poi:
+    get:
+      tags:
+        - Points of Interest
+      summary: List all points of interest
+      description: Retrieve a list of all points of interest (POI)
+      responses:
+        '200':
+          description: A list of points of interest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POIResponse'
+              example:
+                id: "http://localhost:8088/api/poi?page=1"
+                total: 5516
+                per_page: 100
+                current_page: 1
+                last_page: 56
+                next: "http://localhost:8088/api/poi?page=2"
+                previous: null
+                items:
+                  - type: "Feature"
+                    properties:
+                      uuid: "00157e17-e67e-5975-acd7-669196d84dc1"
+                      rde_type: "poi"
+                      time_range: 
+                        - "1575-07-07"
+                        - "1575-07-07"
+                      contains:
+                        - "db0b400f-3baf-5d85-b4ac-db620918b0a2"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.33372
+                        - 45.43573
+                  - type: "Feature"
+                    properties:
+                      uuid: "0019a276-f4e9-5c5e-8a31-1e15cd8414ec"
+                      rde_type: "poi"
+                      time_range: 
+                        - "1594-02-06"
+                        - "1594-02-06"
+                      contains:
+                        - "332810c2-423a-538d-8568-50e72528ee07"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.3267
+                        - 45.4434
+  /poi/{uuid}:
+    get:
+      tags:
+        - Points of Interest
+      summary: Get a specific point of interest
+      description: Retrieve a specific point of interest by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the point of interest to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The point of interest details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POI'
+              example:
+                type: "Feature"
+                properties:
+                  uuid: "00157e17-e67e-5975-acd7-669196d84dc1"
+                  rde_type: "poi"
+                  time_range: 
+                    - "1575-07-07"
+                    - "1575-07-07"
+                  contains:
+                    - "db0b400f-3baf-5d85-b4ac-db620918b0a2"
+                geometry:
+                  type: "Point"
+                  coordinates:
+                    - 12.33372
+                    - 45.43573
+        '404':
+          description: Point of interest not found
+  /poi/geojson:
+    get:
+      tags:
+        - Points of Interest
+      summary: Fetch POIs based on their position
+      description: Retrieve points of interest within a specified bounding box (bbox)
+      parameters:
+        - name: bbox
+          in: query
+          required: true
+          description: Bounding box to filter the points of interest, formatted as `minLon,minLat,maxLon,maxLat`
+          schema:
+            type: string
+            example: '12.334753,45.436846,12.342332,45.433338'
+      responses:
+        '200':
+          description: A collection of points of interest within the specified bbox
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POIFeatureCollection'
+              example:
+                type: "FeatureCollection"
+                crs:
+                  type: "name"
+                  properties:
+                    name: "urn:ogc:def:crs:OGC:1.3:CRS84"
+                features:
+                  - type: "Feature"
+                    properties:
+                      uuid: "32f348cb-a4a3-543f-b026-6d25f75e3358"
+                      rde_type: "poi"
+                      time_range: 
+                        - "1620-07-15"
+                        - "1620-07-15"
+                      contains:
+                        - "bf4b5d08-b9b0-5710-827c-229dae95d5d7"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.337151
+                        - 45.433645
+                  - type: "Feature"
+                    properties:
+                      uuid: "35f76aff-f9a4-5a87-8241-dc8b64d19fb7"
+                      rde_type: "poi"
+                      time_range: 
+                        - "1621-01-10"
+                        - "1621-01-10"
+                      contains:
+                        - "6db108c1-b89b-518a-8f73-3a166c9fa1a9"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.337151
+                        - 45.433645
+                  - type: "Feature"
+                    properties:
+                      uuid: "516a9566-2a36-5749-83ac-ad7e08ef84cc"
+                      rde_type: "poi"
+                      time_range: 
+                        - "1606-07-24"
+                        - "1606-07-24"
+                      contains:
+                        - "0ad48718-f0cf-5d7d-96de-653b575f2572"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.337151
+                        - 45.433645
+  /obs:
+    get:
+      tags:
+        - Observations
+      summary: List all observations
+      description: Retrieve a list of all observations
+      responses:
+        '200':
+          description: A list of observations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservationsResponse'
+              example:
+                id: "http://localhost:8088/api/obs?page=1"
+                total: 5516
+                per_page: 100
+                current_page: 1
+                last_page: 56
+                next: "http://localhost:8088/api/obs?page=2"
+                previous: null
+                items:
+                  - type: "Feature"
+                    properties:
+                      uuid: "c611232c-291a-5962-9d8d-f56745271b73"
+                      dataset_id: "VENICE_GARZONI"
+                      dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
+                      rde_type: "obs"
+                      type: "event"
+                      time_range: 
+                        - "1575-01-02"
+                        - "1575-01-02"
+                      has_spatial_projection:
+                        - "bfdf411d-cafe-531d-b8ce-fd8a12ab7c27"
+                      documented_in:
+                        - "394a376b-2075-5039-a6dc-f5f2c322bc5e"
+                      part_of:
+                        - "4bb39b4c-7e2a-5e1f-b178-a917ac35eeef"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.3334
+                        - 45.44178
+                  - type: "Feature"
+                    properties:
+                      uuid: "f3c772c9-03ae-5d10-bde9-5631ae783d22"
+                      dataset_id: "VENICE_GARZONI"
+                      dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
+                      rde_type: "obs"
+                      type: "event"
+                      time_range: 
+                        - "1575-01-02"
+                        - "1575-01-02"
+                      has_spatial_projection:
+                        - "2a1f5629-e690-5197-ae2d-6a2205dc2dbe"
+                      documented_in:
+                        - "9034d850-7137-55bc-afce-7c9dfe7ca197"
+                      part_of:
+                        - "4c9b1d3e-de76-5259-ab69-db12b06dc9ed"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 12.33219
+                        - 45.44296
+  /obs/{uuid}:
+    get:
+      tags:
+        - Observations
+      summary: Get a specific observation
+      description: Retrieve a specific observation by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the observation to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The observation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Observation'
+              example:
+                type: "Feature"
+                properties:
+                  uuid: "db0b400f-3baf-5d85-b4ac-db620918b0a2"
+                  dataset_id: "VENICE_GARZONI"
+                  dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
+                  rde_type: "obs"
+                  type: "event"
+                  time_range: 
+                    - "1575-07-07"
+                    - "1575-07-07"
+                  has_spatial_projection:
+                    - "8761d309-e2aa-5f3a-bbe0-77ffbf0216e4"
+                  documented_in:
+                    - "87783dd8-3a62-5956-bf98-e369370c86cd"
+                  part_of:
+                    - "00157e17-e67e-5975-acd7-669196d84dc1"
+                geometry:
+                  type: "Point"
+                  coordinates:
+                    - 12.33372
+                    - 45.43573
+        '404':
+          description: Observation not found
+  /hr:
+    get:
+      tags:
+        - Historical Records
+      summary: List all historical records
+      description: Retrieve a list of all historical records (HR)
+      responses:
+        '200':
+          description: A list of historical records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HistoricalRecord'
+  /hr/{uuid}:
+    get:
+      tags:
+        - Historical Records
+      summary: Get a specific historical record
+      description: Retrieve a specific historical record by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the historical record to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The historical record details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalRecord'
+        '404':
+          description: Historical record not found
+  /geometries:
+    get:
+      tags:
+        - Geometries
+      summary: List all geometries
+      description: Retrieve a list of all geometries
+      responses:
+        '200':
+          description: A list of geometries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Geometry'
+  /geometries/{uuid}:
+    get:
+      tags:
+        - Geometries
+      summary: Get a specific geometry
+      description: Retrieve a specific geometry by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the geometry to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The geometry details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geometry'
+        '404':
+          description: Geometry not found
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: 'fb5761db-9b73-502b-bd4c-7a3f4516e911'
+        dataset_id:
+          type: string
+          example: 'VENICE_GARZONI'
+        rde_type:
+          type: string
+          example: 'dataset'
+        description:
+          type: string
+          example: 'TODO'
+        paradata:
+          type: string
+          example: 'TODO'
+        time_range:
+          type: array
+          items:
+            type: string
+            format: date
+            example: '1575-01-01'
+        configuration:
+          type: string
+          example: 'garzoni_ds_configuration.json'
+    DatasetsResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'http://localhost:8088/api/datasets?page=1'
+        total:
+          type: integer
+          example: 2
+        per_page:
+          type: integer
+          example: 100
+        current_page:
+          type: integer
+          example: 1
+        last_page:
+          type: integer
+          example: 1
+        next:
+          type: string
+          nullable: true
+          example: null
+        previous:
+          type: string
+          nullable: true
+          example: null
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dataset'
+    POI:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'Feature'
+        properties:
+          type: object
+          properties:
+            uuid:
+              type: string
+              example: '00157e17-e67e-5975-acd7-669196d84dc1'
+            rde_type:
+              type: string
+              example: 'poi'
+            time_range:
+              type: array
+              items:
+                type: string
+                format: date
+                example: '1575-07-07'
+            contains:
+              type: array
+              items:
+                type: string
+                example: 'db0b400f-3baf-5d85-b4ac-db620918b0a2'
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              example: 'Point'
+            coordinates:
+              type: array
+              items:
+                type: number
+                example: 12.33372
+    POIResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'http://localhost:8088/api/poi?page=1'
+        total:
+          type: integer
+          example: 5516
+        per_page:
+          type: integer
+          example: 100
+        current_page:
+          type: integer
+          example: 1
+        last_page:
+          type: integer
+          example: 56
+        next:
+          type: string
+          nullable: true
+          example: 'http://localhost:8088/api/poi?page=2'
+        previous:
+          type: string
+          nullable: true
+          example: null
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/POI'
+    POIFeature:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'Feature'
+        properties:
+          type: object
+          properties:
+            uuid:
+              type: string
+              example: '32f348cb-a4a3-543f-b026-6d25f75e3358'
+            rde_type:
+              type: string
+              example: 'poi'
+            time_range:
+              type: array
+              items:
+                type: string
+                format: date
+                example: '1620-07-15'
+            contains:
+              type: array
+              items:
+                type: string
+                example: 'bf4b5d08-b9b0-5710-827c-229dae95d5d7'
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              example: 'Point'
+            coordinates:
+              type: array
+              items:
+                type: number
+                example: 12.337151
+    POIFeatureCollection:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'FeatureCollection'
+        crs:
+          type: object
+          properties:
+            type:
+              type: string
+              example: 'name'
+            properties:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/POIFeature'
+    Observation:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'Feature'
+        properties:
+          type: object
+          properties:
+            uuid:
+              type: string
+              example: 'db0b400f-3baf-5d85-b4ac-db620918b0a2'
+            dataset_id:
+              type: string
+              example: 'VENICE_GARZONI'
+            dataset_uuid:
+              type: string
+              example: 'fb5761db-9b73-502b-bd4c-7a3f4516e911'
+            rde_type:
+              type: string
+              example: 'obs'
+            type:
+              type: string
+              example: 'event'
+            time_range:
+              type: array
+              items:
+                type: string
+                format: date
+                example: '1575-07-07'
+            has_spatial_projection:
+              type: array
+              items:
+                type: string
+                example: '8761d309-e2aa-5f3a-bbe0-77ffbf0216e4'
+            documented_in:
+              type: array
+              items:
+                type: string
+                example: '87783dd8-3a62-5956-bf98-e369370c86cd'
+            part_of:
+              type: array
+              items:
+                type: string
+                example: '00157e17-e67e-5975-acd7-669196d84dc1'
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              example: 'Point'
+            coordinates:
+              type: array
+              items:
+                type: number
+                example: 12.33372
+    ObservationsResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'http://localhost:8088/api/obs?page=1'
+        total:
+          type: integer
+          example: 5516
+        per_page:
+          type: integer
+          example: 100
+        current_page:
+          type: integer
+          example: 1
+        last_page:
+          type: integer
+          example: 56
+        next:
+          type: string
+          nullable: true
+          example: 'http://localhost:8088/api/obs?page=2'
+        previous:
+          type: string
+          nullable: true
+          example: null
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Observation'
+    HistoricalRecord:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: '123e4567-e89b-12d3-a456-426614174003'
+        title:
+          type: string
+          example: 'Historical Record Title'
+        description:
+          type: string
+          example: 'Description of the historical record'
+    Geometry:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: '123e4567-e89b-12d3-a456-426614174004'
+        name:
+          type: string
+          example: 'Geometry Name'
+        description:
+          type: string
+          example: 'Description of the geometry'
