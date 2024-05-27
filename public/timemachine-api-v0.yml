@@ -24,12 +24,12 @@ paths:
       summary: List all datasets
       description: Retrieve a list of all datasets
       responses:
-        '200':
+        "200":
           description: A list of datasets
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DatasetsResponse'
+                $ref: "#/components/schemas/DatasetsResponse"
               example:
                 id: "https://demo-timemachine.epfl.ch/api/datasets?page=1"
                 total: 2
@@ -44,16 +44,16 @@ paths:
                     rde_type: "dataset"
                     description: "TODO"
                     paradata: "TODO"
-                    time_range: 
+                    time_range:
                       - "1575-01-01"
                       - "1772-12-31"
                     configuration: "garzoni_ds_configuration.json"
                   - uuid: "29d8504f-52fc-56a3-b7b1-8960b2ebb1e0"
                     dataset_id: "VENICE_1808_SOMMARIONI"
                     rde_type: "dataset"
-                    description: "Digitisation of the 1808 Napoleonic cadaster of Venice. Contains both numeric facsimile of the cadatser map as well as their description in the written registry, called the \"Sommarioni\""
+                    description: 'Digitisation of the 1808 Napoleonic cadaster of Venice. Contains both numeric facsimile of the cadatser map as well as their description in the written registry, called the "Sommarioni"'
                     paradata: "The textual data from the register was manually transcribed, then semi-automatically cleaned and normalized by various researchers. The maps were vetcorized into geometries through computer vision techniques and then manually corrected and expanded."
-                    time_range: 
+                    time_range:
                       - "1808-01-01"
                       - "1808-12-31"
                     configuration: "sommarioni_ds_configuration.json"
@@ -71,23 +71,23 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The dataset details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Dataset'
+                $ref: "#/components/schemas/Dataset"
               example:
                 uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
                 dataset_id: "VENICE_GARZONI"
                 rde_type: "dataset"
                 description: "TODO"
                 paradata: "TODO"
-                time_range: 
+                time_range:
                   - "1575-01-01"
                   - "1772-12-31"
                 configuration: "garzoni_ds_configuration.json"
-        '404':
+        "404":
           description: Dataset not found
   /poi:
     get:
@@ -96,12 +96,12 @@ paths:
       summary: List all points of interest
       description: Retrieve a list of all points of interest (POI)
       responses:
-        '200':
+        "200":
           description: A list of points of interest
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/POIResponse'
+                $ref: "#/components/schemas/POIResponse"
               example:
                 id: "https://demo-timemachine.epfl.ch/api/poi?page=1"
                 total: 5516
@@ -115,7 +115,7 @@ paths:
                     properties:
                       uuid: "00157e17-e67e-5975-acd7-669196d84dc1"
                       rde_type: "poi"
-                      time_range: 
+                      time_range:
                         - "1575-07-07"
                         - "1575-07-07"
                       contains:
@@ -129,7 +129,7 @@ paths:
                     properties:
                       uuid: "0019a276-f4e9-5c5e-8a31-1e15cd8414ec"
                       rde_type: "poi"
-                      time_range: 
+                      time_range:
                         - "1594-02-06"
                         - "1594-02-06"
                       contains:
@@ -153,18 +153,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The point of interest details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/POI'
+                $ref: "#/components/schemas/POI"
               example:
                 type: "Feature"
                 properties:
                   uuid: "00157e17-e67e-5975-acd7-669196d84dc1"
                   rde_type: "poi"
-                  time_range: 
+                  time_range:
                     - "1575-07-07"
                     - "1575-07-07"
                   contains:
@@ -174,7 +174,7 @@ paths:
                   coordinates:
                     - 12.33372
                     - 45.43573
-        '404':
+        "404":
           description: Point of interest not found
   /poi/geojson:
     get:
@@ -189,14 +189,14 @@ paths:
           description: Bounding box to filter the points of interest, formatted as `minLon,minLat,maxLon,maxLat`
           schema:
             type: string
-            example: '12.334753,45.436846,12.342332,45.433338'
+            example: "12.334753,45.436846,12.342332,45.433338"
       responses:
-        '200':
+        "200":
           description: A collection of points of interest within the specified bbox
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/POIFeatureCollection'
+                $ref: "#/components/schemas/POIFeatureCollection"
               example:
                 type: "FeatureCollection"
                 crs:
@@ -208,7 +208,7 @@ paths:
                     properties:
                       uuid: "32f348cb-a4a3-543f-b026-6d25f75e3358"
                       rde_type: "poi"
-                      time_range: 
+                      time_range:
                         - "1620-07-15"
                         - "1620-07-15"
                       contains:
@@ -222,7 +222,7 @@ paths:
                     properties:
                       uuid: "35f76aff-f9a4-5a87-8241-dc8b64d19fb7"
                       rde_type: "poi"
-                      time_range: 
+                      time_range:
                         - "1621-01-10"
                         - "1621-01-10"
                       contains:
@@ -236,7 +236,7 @@ paths:
                     properties:
                       uuid: "516a9566-2a36-5749-83ac-ad7e08ef84cc"
                       rde_type: "poi"
-                      time_range: 
+                      time_range:
                         - "1606-07-24"
                         - "1606-07-24"
                       contains:
@@ -253,12 +253,12 @@ paths:
       summary: List all observations
       description: Retrieve a list of all observations
       responses:
-        '200':
+        "200":
           description: A list of observations
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ObservationsResponse'
+                $ref: "#/components/schemas/ObservationsResponse"
               example:
                 id: "https://demo-timemachine.epfl.ch/api/obs?page=1"
                 total: 5516
@@ -275,7 +275,7 @@ paths:
                       dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
                       rde_type: "obs"
                       type: "event"
-                      time_range: 
+                      time_range:
                         - "1575-01-02"
                         - "1575-01-02"
                       has_spatial_projection:
@@ -296,7 +296,7 @@ paths:
                       dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
                       rde_type: "obs"
                       type: "event"
-                      time_range: 
+                      time_range:
                         - "1575-01-02"
                         - "1575-01-02"
                       has_spatial_projection:
@@ -324,12 +324,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The observation details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Observation'
+                $ref: "#/components/schemas/Observation"
               example:
                 type: "Feature"
                 properties:
@@ -338,7 +338,7 @@ paths:
                   dataset_uuid: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
                   rde_type: "obs"
                   type: "event"
-                  time_range: 
+                  time_range:
                     - "1575-07-07"
                     - "1575-07-07"
                   has_spatial_projection:
@@ -352,7 +352,7 @@ paths:
                   coordinates:
                     - 12.33372
                     - 45.43573
-        '404':
+        "404":
           description: Observation not found
   /hr:
     get:
@@ -361,12 +361,12 @@ paths:
       summary: List all historical records
       description: Retrieve a list of all historical records
       responses:
-        '200':
+        "200":
           description: A list of historical records
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HistoricalRecordsResponse'
+                $ref: "#/components/schemas/HistoricalRecordsResponse"
               example:
                 id: "https://demo-timemachine.epfl.ch/api/hr?page=1"
                 total: 62213
@@ -380,7 +380,7 @@ paths:
                     dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
                     rde_type: "hr"
                     type: "apprenticeship"
-                    time_range: 
+                    time_range:
                       - "1740-01-01"
                       - "1740-12-31"
                     paradata: "m"
@@ -416,7 +416,7 @@ paths:
                     dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
                     rde_type: "hr"
                     type: "apprenticeship"
-                    time_range: 
+                    time_range:
                       - "1740-01-01"
                       - "1740-12-31"
                     paradata: "m"
@@ -452,7 +452,7 @@ paths:
                     dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
                     rde_type: "hr"
                     type: "apprenticeship"
-                    time_range: 
+                    time_range:
                       - "1740-01-01"
                       - "1740-12-31"
                     paradata: "m"
@@ -498,18 +498,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The historical record details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HistoricalRecord'
+                $ref: "#/components/schemas/HistoricalRecord"
               example:
                 uuid: "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
                 dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
                 rde_type: "hr"
                 type: "apprenticeship"
-                time_range: 
+                time_range:
                   - "1740-01-01"
                   - "1740-12-31"
                 paradata: "m"
@@ -541,7 +541,7 @@ paths:
                   sestiere: "CN"
                   uid: "CNC-0001"
                   path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
-        '404':
+        "404":
           description: Historical record not found
   /geometries:
     get:
@@ -550,12 +550,12 @@ paths:
       summary: List all geometries
       description: Retrieve a list of all geometries
       responses:
-        '200':
+        "200":
           description: A list of geometries
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GeometriesResponse'
+                $ref: "#/components/schemas/GeometriesResponse"
               example:
                 id: "https://demo-timemachine.epfl.ch/api/geometries?page=1"
                 total: 24506
@@ -570,7 +570,7 @@ paths:
                       uuid: "48901e4e-5814-5933-875b-662da8372e7b"
                       map_id: "VENICE_1740_PARISH_MAP"
                       rde_type: "geometry"
-                      time_range: 
+                      time_range:
                         - "1575-01-01"
                         - "1772-12-31"
                     geometry:
@@ -593,14 +593,14 @@ paths:
                             [1372061.6560155072, 5691867.400597848],
                             [1372067.7178286265, 5691854.417703299],
                             [1372011.1779420741, 5691780.110506882],
-                            [1371976.5745785462, 5691731.290402323]
+                            [1371976.5745785462, 5691731.290402323],
                           ]
                   - type: "Feature"
                     properties:
                       uuid: "d8b87e62-d6da-53f6-962e-1ea9c5310503"
                       map_id: "VENICE_1740_PARISH_MAP"
                       rde_type: "geometry"
-                      time_range: 
+                      time_range:
                         - "1575-01-01"
                         - "1772-12-31"
                     geometry:
@@ -618,7 +618,7 @@ paths:
                             [1372193.6392061901, 5691821.395300667],
                             [1372183.8523662712, 5691848.227956227],
                             [1372158.1465505103, 5691891.9013198465],
-                            [1372133.087756787, 5691922.260532453]
+                            [1372133.087756787, 5691922.260532453],
                           ]
   /geometries/{uuid}:
     get:
@@ -634,19 +634,19 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: The geometry details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Geometry'
+                $ref: "#/components/schemas/Geometry"
               example:
                 type: "Feature"
                 properties:
                   uuid: "48901e4e-5814-5933-875b-662da8372e7b"
                   map_id: "VENICE_1740_PARISH_MAP"
                   rde_type: "geometry"
-                  time_range: 
+                  time_range:
                     - "1575-01-01"
                     - "1772-12-31"
                 geometry:
@@ -669,9 +669,9 @@ paths:
                         [1372061.6560155072, 5691867.400597848],
                         [1372067.7178286265, 5691854.417703299],
                         [1372011.1779420741, 5691780.110506882],
-                        [1371976.5745785462, 5691731.290402323]
+                        [1371976.5745785462, 5691731.290402323],
                       ]
-        '404':
+        "404":
           description: Geometry not found
 components:
   schemas:
@@ -680,34 +680,34 @@ components:
       properties:
         uuid:
           type: string
-          example: 'fb5761db-9b73-502b-bd4c-7a3f4516e911'
+          example: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
         dataset_id:
           type: string
-          example: 'VENICE_GARZONI'
+          example: "VENICE_GARZONI"
         rde_type:
           type: string
-          example: 'dataset'
+          example: "dataset"
         description:
           type: string
-          example: 'TODO'
+          example: "TODO"
         paradata:
           type: string
-          example: 'TODO'
+          example: "TODO"
         time_range:
           type: array
           items:
             type: string
             format: date
-            example: '1575-01-01'
+            example: "1575-01-01"
         configuration:
           type: string
-          example: 'garzoni_ds_configuration.json'
+          example: "garzoni_ds_configuration.json"
     DatasetsResponse:
       type: object
       properties:
         id:
           type: string
-          example: 'https://demo-timemachine.epfl.ch/api/datasets?page=1'
+          example: "https://demo-timemachine.epfl.ch/api/datasets?page=1"
         total:
           type: integer
           example: 2
@@ -731,39 +731,39 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Dataset'
+            $ref: "#/components/schemas/Dataset"
     POI:
       type: object
       properties:
         type:
           type: string
-          example: 'Feature'
+          example: "Feature"
         properties:
           type: object
           properties:
             uuid:
               type: string
-              example: '00157e17-e67e-5975-acd7-669196d84dc1'
+              example: "00157e17-e67e-5975-acd7-669196d84dc1"
             rde_type:
               type: string
-              example: 'poi'
+              example: "poi"
             time_range:
               type: array
               items:
                 type: string
                 format: date
-                example: '1575-07-07'
+                example: "1575-07-07"
             contains:
               type: array
               items:
                 type: string
-                example: 'db0b400f-3baf-5d85-b4ac-db620918b0a2'
+                example: "db0b400f-3baf-5d85-b4ac-db620918b0a2"
         geometry:
           type: object
           properties:
             type:
               type: string
-              example: 'Point'
+              example: "Point"
             coordinates:
               type: array
               items:
@@ -774,7 +774,7 @@ components:
       properties:
         id:
           type: string
-          example: 'https://demo-timemachine.epfl.ch/api/poi?page=1'
+          example: "https://demo-timemachine.epfl.ch/api/poi?page=1"
         total:
           type: integer
           example: 5516
@@ -790,7 +790,7 @@ components:
         next:
           type: string
           nullable: true
-          example: 'https://demo-timemachine.epfl.ch/api/poi?page=2'
+          example: "https://demo-timemachine.epfl.ch/api/poi?page=2"
         previous:
           type: string
           nullable: true
@@ -798,39 +798,39 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/POI'
+            $ref: "#/components/schemas/POI"
     POIFeature:
       type: object
       properties:
         type:
           type: string
-          example: 'Feature'
+          example: "Feature"
         properties:
           type: object
           properties:
             uuid:
               type: string
-              example: '32f348cb-a4a3-543f-b026-6d25f75e3358'
+              example: "32f348cb-a4a3-543f-b026-6d25f75e3358"
             rde_type:
               type: string
-              example: 'poi'
+              example: "poi"
             time_range:
               type: array
               items:
                 type: string
                 format: date
-                example: '1620-07-15'
+                example: "1620-07-15"
             contains:
               type: array
               items:
                 type: string
-                example: 'bf4b5d08-b9b0-5710-827c-229dae95d5d7'
+                example: "bf4b5d08-b9b0-5710-827c-229dae95d5d7"
         geometry:
           type: object
           properties:
             type:
               type: string
-              example: 'Point'
+              example: "Point"
             coordinates:
               type: array
               items:
@@ -841,74 +841,74 @@ components:
       properties:
         type:
           type: string
-          example: 'FeatureCollection'
+          example: "FeatureCollection"
         crs:
           type: object
           properties:
             type:
               type: string
-              example: 'name'
+              example: "name"
             properties:
               type: object
               properties:
                 name:
                   type: string
-                  example: 'urn:ogc:def:crs:OGC:1.3:CRS84'
+                  example: "urn:ogc:def:crs:OGC:1.3:CRS84"
         features:
           type: array
           items:
-            $ref: '#/components/schemas/POIFeature'
+            $ref: "#/components/schemas/POIFeature"
     Observation:
       type: object
       properties:
         type:
           type: string
-          example: 'Feature'
+          example: "Feature"
         properties:
           type: object
           properties:
             uuid:
               type: string
-              example: 'db0b400f-3baf-5d85-b4ac-db620918b0a2'
+              example: "db0b400f-3baf-5d85-b4ac-db620918b0a2"
             dataset_id:
               type: string
-              example: 'VENICE_GARZONI'
+              example: "VENICE_GARZONI"
             dataset_uuid:
               type: string
-              example: 'fb5761db-9b73-502b-bd4c-7a3f4516e911'
+              example: "fb5761db-9b73-502b-bd4c-7a3f4516e911"
             rde_type:
               type: string
-              example: 'obs'
+              example: "obs"
             type:
               type: string
-              example: 'event'
+              example: "event"
             time_range:
               type: array
               items:
                 type: string
                 format: date
-                example: '1575-07-07'
+                example: "1575-07-07"
             has_spatial_projection:
               type: array
               items:
                 type: string
-                example: '8761d309-e2aa-5f3a-bbe0-77ffbf0216e4'
+                example: "8761d309-e2aa-5f3a-bbe0-77ffbf0216e4"
             documented_in:
               type: array
               items:
                 type: string
-                example: '87783dd8-3a62-5956-bf98-e369370c86cd'
+                example: "87783dd8-3a62-5956-bf98-e369370c86cd"
             part_of:
               type: array
               items:
                 type: string
-                example: '00157e17-e67e-5975-acd7-669196d84dc1'
+                example: "00157e17-e67e-5975-acd7-669196d84dc1"
         geometry:
           type: object
           properties:
             type:
               type: string
-              example: 'Point'
+              example: "Point"
             coordinates:
               type: array
               items:
@@ -919,7 +919,7 @@ components:
       properties:
         id:
           type: string
-          example: 'https://demo-timemachine.epfl.ch/api/obs?page=1'
+          example: "https://demo-timemachine.epfl.ch/api/obs?page=1"
         total:
           type: integer
           example: 5516
@@ -935,7 +935,7 @@ components:
         next:
           type: string
           nullable: true
-          example: 'https://demo-timemachine.epfl.ch/api/obs?page=2'
+          example: "https://demo-timemachine.epfl.ch/api/obs?page=2"
         previous:
           type: string
           nullable: true
@@ -943,84 +943,84 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Observation'
+            $ref: "#/components/schemas/Observation"
     HistoricalRecord:
       type: object
       properties:
         uuid:
           type: string
-          example: '2d351b23-3474-5bcf-8d4c-30cfec8862d7'
+          example: "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
         dataset_id:
           type: string
-          example: '711a79f7-b7d5-59b4-8dec-49f7857c1525'
+          example: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
         rde_type:
           type: string
-          example: 'hr'
+          example: "hr"
         type:
           type: string
-          example: 'apprenticeship'
+          example: "apprenticeship"
         time_range:
           type: array
           items:
             type: string
             format: date
-            example: '1740-01-01'
+            example: "1740-01-01"
         paradata:
           type: string
-          example: 'm'
+          example: "m"
         documents:
           type: array
           items:
             type: string
-            example: 'f158d140-3c0e-517a-8d51-625f3e996ce7'
+            example: "f158d140-3c0e-517a-8d51-625f3e996ce7"
         metadata:
           type: object
           properties:
             owner_name:
               type: string
-              example: 'Liberal Campi secondo prete titolato della Chiesa'
+              example: "Liberal Campi secondo prete titolato della Chiesa"
             owner_code:
               type: string
-              example: 'PPL'
+              example: "PPL"
             owner_count:
               type: integer
               example: 1
             owner_count_remark:
               type: string
-              example: ''
+              example: ""
             owner_entity:
               type: string
-              example: ''
+              example: ""
             owner_entity_group:
               type: string
-              example: ''
+              example: ""
             owner_first_name:
               type: string
-              example: 'Liberal'
+              example: "Liberal"
             owner_family_name:
               type: string
-              example: 'CAMPI'
+              example: "CAMPI"
             owner_family_group:
               type: string
-              example: 'CAMPI'
+              example: "CAMPI"
             owner_title:
               type: string
-              example: 'SECONDO PRETE TITOLATO DELLA CHIESA'
+              example: "SECONDO PRETE TITOLATO DELLA CHIESA"
             owner_title_std:
               type: string
-              example: 'SECONDO PRETE'
+              example: "SECONDO PRETE"
             owner_mestiere:
               type: string
-              example: ''
+              example: ""
             owner_mestiere_std:
               type: string
-              example: ''
+              example: ""
             ten_name:
               type: string
-              example: 'Francesco Zeni'
+              example: "Francesco Zeni"
             function:
               type: string
-              example: 'casa e bottega da barbier'
+              example: "casa e bottega da barbier"
             an_rendi:
               type: integer
               example: 70
@@ -1029,34 +1029,34 @@ components:
               example: 3052
             quantity_income:
               type: string
-              example: 'nan'
+              example: "nan"
             quality_income:
               type: string
-              example: 'nan'
+              example: "nan"
             author:
               type: string
-              example: 'Davide'
+              example: "Davide"
             place:
               type: string
-              example: 'Campo vicino alla Chiesa'
+              example: "Campo vicino alla Chiesa"
             parish:
               type: string
-              example: 'San Cancian'
+              example: "San Cancian"
             sestiere:
               type: string
-              example: 'CN'
+              example: "CN"
             uid:
               type: string
-              example: 'CNC-0001'
+              example: "CNC-0001"
             path_img:
               type: string
-              example: '436_Cannaregio/11_SCancian/SCancian_0_1.png'
+              example: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
     HistoricalRecordsResponse:
       type: object
       properties:
         id:
           type: string
-          example: 'https://demo-timemachine.epfl.ch/api/hr?page=1'
+          example: "https://demo-timemachine.epfl.ch/api/hr?page=1"
         total:
           type: integer
           example: 62213
@@ -1072,7 +1072,7 @@ components:
         next:
           type: string
           nullable: true
-          example: 'https://demo-timemachine.epfl.ch/api/hr?page=2'
+          example: "https://demo-timemachine.epfl.ch/api/hr?page=2"
         previous:
           type: string
           nullable: true
@@ -1080,37 +1080,37 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/HistoricalRecord'
+            $ref: "#/components/schemas/HistoricalRecord"
     Geometry:
       type: object
       properties:
         type:
           type: string
-          example: 'Feature'
+          example: "Feature"
         properties:
           type: object
           properties:
             uuid:
               type: string
-              example: '48901e4e-5814-5933-875b-662da8372e7b'
+              example: "48901e4e-5814-5933-875b-662da8372e7b"
             map_id:
               type: string
-              example: 'VENICE_1740_PARISH_MAP'
+              example: "VENICE_1740_PARISH_MAP"
             rde_type:
               type: string
-              example: 'geometry'
+              example: "geometry"
             time_range:
               type: array
               items:
                 type: string
                 format: date
-                example: '1575-01-01'
+                example: "1575-01-01"
         geometry:
           type: object
           properties:
             type:
               type: string
-              example: 'Polygon'
+              example: "Polygon"
             coordinates:
               type: array
               items:
@@ -1125,7 +1125,7 @@ components:
       properties:
         id:
           type: string
-          example: 'https://demo-timemachine.epfl.ch/api/geometries?page=1'
+          example: "https://demo-timemachine.epfl.ch/api/geometries?page=1"
         total:
           type: integer
           example: 24506
@@ -1141,7 +1141,7 @@ components:
         next:
           type: string
           nullable: true
-          example: 'https://demo-timemachine.epfl.ch/api/geometries?page=2'
+          example: "https://demo-timemachine.epfl.ch/api/geometries?page=2"
         previous:
           type: string
           nullable: true
@@ -1149,4 +1149,4 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Geometry'
+            $ref: "#/components/schemas/Geometry"
