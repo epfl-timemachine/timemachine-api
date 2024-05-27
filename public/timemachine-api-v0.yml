@@ -403,9 +403,71 @@ paths:
           content:
             application/json:
               schema:
-                type: array
+                $ref: '#/components/schemas/GeometriesResponse'
+              example:
+                id: "https://demo-timemachine.epfl.ch/api/geometries?page=1"
+                total: 24506
+                per_page: 100
+                current_page: 1
+                last_page: 246
+                next: "https://demo-timemachine.epfl.ch/api/geometries?page=2"
+                previous: null
                 items:
-                  $ref: '#/components/schemas/Geometry'
+                  - type: "Feature"
+                    properties:
+                      uuid: "48901e4e-5814-5933-875b-662da8372e7b"
+                      map_id: "VENICE_1740_PARISH_MAP"
+                      rde_type: "geometry"
+                      time_range: 
+                        - "1575-01-01"
+                        - "1772-12-31"
+                    geometry:
+                      type: "Polygon"
+                      coordinates:
+                        - [
+                            [1371976.5745785462, 5691731.290402323],
+                            [1372021.3200345468, 5691699.960656367],
+                            [1372085.9354519886, 5691762.27825365],
+                            [1372102.8796899803, 5691773.033982799],
+                            [1372147.516462301, 5691791.828142474],
+                            [1372169.866761354, 5691811.0842214],
+                            [1372163.1845402282, 5691834.440871406],
+                            [1372183.8516300349, 5691848.227823359],
+                            [1372158.1458142607, 5691891.901186975],
+                            [1372133.0884930505, 5691922.260665317],
+                            [1372133.087020524, 5691922.260399587],
+                            [1372115.7736807184, 5691932.218583229],
+                            [1372075.4344623205, 5691916.574836529],
+                            [1372061.6560155072, 5691867.400597848],
+                            [1372067.7178286265, 5691854.417703299],
+                            [1372011.1779420741, 5691780.110506882],
+                            [1371976.5745785462, 5691731.290402323]
+                          ]
+                  - type: "Feature"
+                    properties:
+                      uuid: "d8b87e62-d6da-53f6-962e-1ea9c5310503"
+                      map_id: "VENICE_1740_PARISH_MAP"
+                      rde_type: "geometry"
+                      time_range: 
+                        - "1575-01-01"
+                        - "1772-12-31"
+                    geometry:
+                      type: "Polygon"
+                      coordinates:
+                        - [
+                            [1372133.087756787, 5691922.260532453],
+                            [1372171.9903204797, 5691995.190092289],
+                            [1372313.4133413658, 5691947.112574518],
+                            [1372285.2231295533, 5691879.844296886],
+                            [1372279.254557911, 5691866.3974880455],
+                            [1372269.0183286022, 5691856.0881435815],
+                            [1372242.7523837825, 5691838.570505305],
+                            [1372242.7509113597, 5691838.570239575],
+                            [1372193.6392061901, 5691821.395300667],
+                            [1372183.8523662712, 5691848.227956227],
+                            [1372158.1465505103, 5691891.9013198465],
+                            [1372133.087756787, 5691922.260532453]
+                          ]
   /geometries/{uuid}:
     get:
       tags:
@@ -426,6 +488,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Geometry'
+              example:
+                type: "Feature"
+                properties:
+                  uuid: "48901e4e-5814-5933-875b-662da8372e7b"
+                  map_id: "VENICE_1740_PARISH_MAP"
+                  rde_type: "geometry"
+                  time_range: 
+                    - "1575-01-01"
+                    - "1772-12-31"
+                geometry:
+                  type: "Polygon"
+                  coordinates:
+                    - [
+                        [1371976.5745785462, 5691731.290402323],
+                        [1372021.3200345468, 5691699.960656367],
+                        [1372085.9354519886, 5691762.27825365],
+                        [1372102.8796899803, 5691773.033982799],
+                        [1372147.516462301, 5691791.828142474],
+                        [1372169.866761354, 5691811.0842214],
+                        [1372163.1845402282, 5691834.440871406],
+                        [1372183.8516300349, 5691848.227823359],
+                        [1372158.1458142607, 5691891.901186975],
+                        [1372133.0884930505, 5691922.260665317],
+                        [1372133.087020524, 5691922.260399587],
+                        [1372115.7736807184, 5691932.218583229],
+                        [1372075.4344623205, 5691916.574836529],
+                        [1372061.6560155072, 5691867.400597848],
+                        [1372067.7178286265, 5691854.417703299],
+                        [1372011.1779420741, 5691780.110506882],
+                        [1371976.5745785462, 5691731.290402323]
+                      ]
         '404':
           description: Geometry not found
 components:
@@ -714,12 +807,69 @@ components:
     Geometry:
       type: object
       properties:
-        uuid:
+        type:
           type: string
-          example: '123e4567-e89b-12d3-a456-426614174004'
-        name:
+          example: 'Feature'
+        properties:
+          type: object
+          properties:
+            uuid:
+              type: string
+              example: '48901e4e-5814-5933-875b-662da8372e7b'
+            map_id:
+              type: string
+              example: 'VENICE_1740_PARISH_MAP'
+            rde_type:
+              type: string
+              example: 'geometry'
+            time_range:
+              type: array
+              items:
+                type: string
+                format: date
+                example: '1575-01-01'
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              example: 'Polygon'
+            coordinates:
+              type: array
+              items:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: number
+                    example: 1371976.5745785462
+    GeometriesResponse:
+      type: object
+      properties:
+        id:
           type: string
-          example: 'Geometry Name'
-        description:
+          example: 'https://demo-timemachine.epfl.ch/api/geometries?page=1'
+        total:
+          type: integer
+          example: 24506
+        per_page:
+          type: integer
+          example: 100
+        current_page:
+          type: integer
+          example: 1
+        last_page:
+          type: integer
+          example: 246
+        next:
           type: string
-          example: 'Description of the geometry'
+          nullable: true
+          example: 'https://demo-timemachine.epfl.ch/api/geometries?page=2'
+        previous:
+          type: string
+          nullable: true
+          example: null
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Geometry'
