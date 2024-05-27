@@ -359,16 +359,131 @@ paths:
       tags:
         - Historical Records
       summary: List all historical records
-      description: Retrieve a list of all historical records (HR)
+      description: Retrieve a list of all historical records
       responses:
         '200':
           description: A list of historical records
           content:
             application/json:
               schema:
-                type: array
+                $ref: '#/components/schemas/HistoricalRecordsResponse'
+              example:
+                id: "https://demo-timemachine.epfl.ch/api/hr?page=1"
+                total: 62213
+                per_page: 100
+                current_page: 1
+                last_page: 623
+                next: "https://demo-timemachine.epfl.ch/api/hr?page=2"
+                previous: null
                 items:
-                  $ref: '#/components/schemas/HistoricalRecord'
+                  - uuid: "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range: 
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "f158d140-3c0e-517a-8d51-625f3e996ce7"
+                    metadata:
+                      owner_name: "Liberal Campi secondo prete titolato della Chiesa"
+                      owner_code: "PPL"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: ""
+                      owner_entity_group: ""
+                      owner_first_name: "Liberal"
+                      owner_family_name: "CAMPI"
+                      owner_family_group: "CAMPI"
+                      owner_title: "SECONDO PRETE TITOLATO DELLA CHIESA"
+                      owner_title_std: "SECONDO PRETE"
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Francesco Zeni"
+                      function: "casa e bottega da barbier"
+                      an_rendi: 70
+                      id_napo: 3052
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Davide"
+                      place: "Campo vicino alla Chiesa"
+                      parish: "San Cancian"
+                      sestiere: "CN"
+                      uid: "CNC-0001"
+                      path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
+                  - uuid: "ef792e67-9bbe-5e47-a5f6-b80040f6e813"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range: 
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "58b7e89b-068e-539b-9aba-7f30eedea300"
+                    metadata:
+                      owner_name: "Filippo Frari terzo prete titolato della Chiesa"
+                      owner_code: "PPL"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: ""
+                      owner_entity_group: ""
+                      owner_first_name: "Filippo"
+                      owner_family_name: "FRARI"
+                      owner_family_group: "FRARI"
+                      owner_title: "TERZO PRETE TITOLATO DELLA CHIESA"
+                      owner_title_std: "TERZO PRETE"
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Dio M'aiuti Lazara"
+                      function: "casa"
+                      an_rendi: 60
+                      id_napo: 3051
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Davide"
+                      place: "Campo vicino alla Chiesa"
+                      parish: "San Cancian"
+                      sestiere: "CN"
+                      uid: "CNC-0002"
+                      path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
+                  - uuid: "5097edc6-ebc9-5b2f-8203-a256732a38f7"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range: 
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "e5a0094f-ff37-5c82-9c18-98b65bf0f404"
+                    metadata:
+                      owner_name: "Pievan di San Cancian"
+                      owner_code: "ent_REL_TTL"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: "PIEVAN DI SAN CANCIAN"
+                      owner_entity_group: "CHIESA DI SAN CANCIANO"
+                      owner_first_name: ""
+                      owner_family_name: ""
+                      owner_family_group: ""
+                      owner_title: "pievan di san cancian"
+                      owner_title_std: "PIEVANO"
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Bortolamio Piazza"
+                      function: "bottega da strazariol"
+                      an_rendi: 14
+                      id_napo: "nan"
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Davide"
+                      place: "Campo vicino alla Chiesa"
+                      parish: "San Cancian"
+                      sestiere: "CN"
+                      uid: "CNC-0003"
+                      path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
   /hr/{uuid}:
     get:
       tags:
@@ -389,6 +504,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HistoricalRecord'
+              example:
+                uuid: "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
+                dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                rde_type: "hr"
+                type: "apprenticeship"
+                time_range: 
+                  - "1740-01-01"
+                  - "1740-12-31"
+                paradata: "m"
+                documents:
+                  - "f158d140-3c0e-517a-8d51-625f3e996ce7"
+                metadata:
+                  owner_name: "Liberal Campi secondo prete titolato della Chiesa"
+                  owner_code: "PPL"
+                  owner_count: 1
+                  owner_count_remark: ""
+                  owner_entity: ""
+                  owner_entity_group: ""
+                  owner_first_name: "Liberal"
+                  owner_family_name: "CAMPI"
+                  owner_family_group: "CAMPI"
+                  owner_title: "SECONDO PRETE TITOLATO DELLA CHIESA"
+                  owner_title_std: "SECONDO PRETE"
+                  owner_mestiere: ""
+                  owner_mestiere_std: ""
+                  ten_name: "Francesco Zeni"
+                  function: "casa e bottega da barbier"
+                  an_rendi: 70
+                  id_napo: 3052
+                  quantity_income: "nan"
+                  quality_income: "nan"
+                  author: "Davide"
+                  place: "Campo vicino alla Chiesa"
+                  parish: "San Cancian"
+                  sestiere: "CN"
+                  uid: "CNC-0001"
+                  path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
         '404':
           description: Historical record not found
   /geometries:
@@ -797,13 +949,138 @@ components:
       properties:
         uuid:
           type: string
-          example: '123e4567-e89b-12d3-a456-426614174003'
-        title:
+          example: '2d351b23-3474-5bcf-8d4c-30cfec8862d7'
+        dataset_id:
           type: string
-          example: 'Historical Record Title'
-        description:
+          example: '711a79f7-b7d5-59b4-8dec-49f7857c1525'
+        rde_type:
           type: string
-          example: 'Description of the historical record'
+          example: 'hr'
+        type:
+          type: string
+          example: 'apprenticeship'
+        time_range:
+          type: array
+          items:
+            type: string
+            format: date
+            example: '1740-01-01'
+        paradata:
+          type: string
+          example: 'm'
+        documents:
+          type: array
+          items:
+            type: string
+            example: 'f158d140-3c0e-517a-8d51-625f3e996ce7'
+        metadata:
+          type: object
+          properties:
+            owner_name:
+              type: string
+              example: 'Liberal Campi secondo prete titolato della Chiesa'
+            owner_code:
+              type: string
+              example: 'PPL'
+            owner_count:
+              type: integer
+              example: 1
+            owner_count_remark:
+              type: string
+              example: ''
+            owner_entity:
+              type: string
+              example: ''
+            owner_entity_group:
+              type: string
+              example: ''
+            owner_first_name:
+              type: string
+              example: 'Liberal'
+            owner_family_name:
+              type: string
+              example: 'CAMPI'
+            owner_family_group:
+              type: string
+              example: 'CAMPI'
+            owner_title:
+              type: string
+              example: 'SECONDO PRETE TITOLATO DELLA CHIESA'
+            owner_title_std:
+              type: string
+              example: 'SECONDO PRETE'
+            owner_mestiere:
+              type: string
+              example: ''
+            owner_mestiere_std:
+              type: string
+              example: ''
+            ten_name:
+              type: string
+              example: 'Francesco Zeni'
+            function:
+              type: string
+              example: 'casa e bottega da barbier'
+            an_rendi:
+              type: integer
+              example: 70
+            id_napo:
+              type: integer
+              example: 3052
+            quantity_income:
+              type: string
+              example: 'nan'
+            quality_income:
+              type: string
+              example: 'nan'
+            author:
+              type: string
+              example: 'Davide'
+            place:
+              type: string
+              example: 'Campo vicino alla Chiesa'
+            parish:
+              type: string
+              example: 'San Cancian'
+            sestiere:
+              type: string
+              example: 'CN'
+            uid:
+              type: string
+              example: 'CNC-0001'
+            path_img:
+              type: string
+              example: '436_Cannaregio/11_SCancian/SCancian_0_1.png'
+    HistoricalRecordsResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 'https://demo-timemachine.epfl.ch/api/hr?page=1'
+        total:
+          type: integer
+          example: 62213
+        per_page:
+          type: integer
+          example: 100
+        current_page:
+          type: integer
+          example: 1
+        last_page:
+          type: integer
+          example: 623
+        next:
+          type: string
+          nullable: true
+          example: 'https://demo-timemachine.epfl.ch/api/hr?page=2'
+        previous:
+          type: string
+          nullable: true
+          example: null
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalRecord'
     Geometry:
       type: object
       properties:
