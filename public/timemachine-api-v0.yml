@@ -374,6 +374,113 @@ paths:
                     - 45.43573
         "404":
           description: Observation not found
+  /obs/geojson:
+    get:
+      tags:
+        - Observations
+      summary: Fetch observations based on their position and time range
+      description: Retrieve observations within a specified bounding box (bbox) and time range
+      parameters:
+        - name: bbox
+          in: query
+          required: true
+          description: Bounding box to filter the observations, formatted as `minLon,minLat,maxLon,maxLat`
+          schema:
+            type: string
+            example: "12.334753,45.436846,12.342332,45.433338"
+        - name: not_before
+          in: query
+          required: true
+          description: The start date filter for the observations, formatted as `YYYYMMDD`
+          schema:
+            type: string
+            example: "17000101"
+        - name: not_after
+          in: query
+          required: true
+          description: The end date filter for the observations, formatted as `YYYYMMDD`
+          schema:
+            type: string
+            example: "18000101"
+      responses:
+        "200":
+          description: A collection of observations within the specified bbox and time range
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/POIFeatureCollection"
+              example:
+                type: "FeatureCollection"
+                crs:
+                  type: "name"
+                  properties:
+                    name: "urn:ogc:def:crs:EPSG::3857"
+                features:
+                  - type: "Feature"
+                    properties:
+                      uuid: "a16234ff-8531-55f8-82dd-3f28bfde0b82"
+                      dataset_id: "VENICE_1740_CATASTICI"
+                      dataset_uuid: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                      rde_type: "obs"
+                      type: "cadaster"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
+                      has_spatial_projection: []
+                      documented_in:
+                        - "a3844106-8ee6-5da6-a9df-bb098c4aa7a8"
+                      part_of:
+                        - "64bb0150-dd3c-5a64-a744-484ecaa20edb"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 1373938.0377939525
+                        - 5690148.383265198
+                  - type: "Feature"
+                    properties:
+                      uuid: "d3e1b003-bb7c-5e9b-ba8f-8b836d66f1ae"
+                      dataset_id: "VENICE_1740_CATASTICI"
+                      dataset_uuid: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                      rde_type: "obs"
+                      type: "cadaster"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
+                      has_spatial_projection: []
+                      documented_in:
+                        - "044ddb18-cf33-5c8e-b92d-e0d5fe5c7f34"
+                      part_of:
+                        - "f73008ad-3428-56d9-80dd-d5e329761e98"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 1373938.2456825778
+                        - 5690142.076901313
+                  - type: "Feature"
+                    properties:
+                      uuid: "119a40e0-4f48-5777-bed4-4ef20e7019ed"
+                      dataset_id: "VENICE_1740_CATASTICI"
+                      dataset_uuid: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                      rde_type: "obs"
+                      type: "cadaster"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
+                      has_spatial_projection: []
+                      documented_in:
+                        - "9c393297-7f3d-5eb5-817f-734ede35b712"
+                      part_of:
+                        - "48a57a13-0ad0-505e-b773-c4825c5ebaa2"
+                    geometry:
+                      type: "Point"
+                      coordinates:
+                        - 1373106.621759336
+                        - 5690253.051487133
+                  - type: "Feature"
+                    properties:
+                      uuid: "ab017abf-1403-564f-b869-36f5c907b2df"
+                      dataset_id: "VENICE_1740_CATASTICI"
+                      dataset_uuid: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                      rde_type: "obs"
+                      type: "cadaster"
+                      start_date: "1740-01-01T00:00"
   /hr:
     get:
       tags:
