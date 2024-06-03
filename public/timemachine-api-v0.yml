@@ -611,6 +611,114 @@ paths:
                       sestiere: "CN"
                       uid: "CNC-0003"
                       path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
+  /hr/batch:
+    post:
+      tags:
+        - Historical Records
+      summary: Fetch historical records by UUIDs
+      description: Retrieve a paginated list of historical records based on a list of historical records UUIDs provided in the request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuids:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                    - "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
+                    - "ef792e67-9bbe-5e47-a5f6-b80040f6e813"
+      responses:
+        "200":
+          description: A paginated list of historical records
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalRecordsResponse"
+              example:
+                id: "https://demo-timemachine.epfl.ch/api/hr/batch?page=1"
+                total: 2
+                per_page: 100
+                current_page: 1
+                last_page: 1
+                next: null
+                previous: null
+                items:
+                  - uuid: "2d351b23-3474-5bcf-8d4c-30cfec8862d7"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range:
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "f158d140-3c0e-517a-8d51-625f3e996ce7"
+                    metadata:
+                      owner_name: "Liberal Campi secondo prete titolato della Chiesa"
+                      owner_code: "PPL"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: ""
+                      owner_entity_group: ""
+                      owner_first_name: "Liberal"
+                      owner_family_name: "CAMPI"
+                      owner_family_group: "CAMPI"
+                      owner_title: "SECONDO PRETE TITOLATO DELLA CHIESA"
+                      owner_title_std: "SECONDO PRETE"
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Francesco Zeni"
+                      function: "casa e bottega da barbier"
+                      an_rendi: 70
+                      id_napo: 3052
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Davide"
+                      place: "Campo vicino alla Chiesa"
+                      parish: "San Cancian"
+                      sestiere: "CN"
+                      uid: "CNC-0001"
+                      path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
+                  - uuid: "ef792e67-9bbe-5e47-a5f6-b80040f6e813"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range:
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "58b7e89b-068e-539b-9aba-7f30eedea300"
+                    metadata:
+                      owner_name: "Filippo Frari terzo prete titolato della Chiesa"
+                      owner_code: "PPL"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: ""
+                      owner_entity_group: ""
+                      owner_first_name: "Filippo"
+                      owner_family_name: "FRARI"
+                      owner_family_group: "FRARI"
+                      owner_title: "TERZO PRETE TITOLATO DELLA CHIESA"
+                      owner_title_std: "TERZO PRETE"
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Dio M'aiuti Lazara"
+                      function: "casa"
+                      an_rendi: 60
+                      id_napo: 3051
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Davide"
+                      place: "Campo vicino alla Chiesa"
+                      parish: "San Cancian"
+                      sestiere: "CN"
+                      uid: "CNC-0002"
+                      path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
   /hr/{uuid}:
     get:
       tags:
