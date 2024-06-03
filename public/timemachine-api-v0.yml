@@ -778,6 +778,136 @@ paths:
                   path_img: "436_Cannaregio/11_SCancian/SCancian_0_1.png"
         "404":
           description: Historical record not found
+  /poi/{uuid}/hr:
+    get:
+      tags:
+        - Historical Records
+      summary: List historical records related to a point of interest
+      description: Retrieve a list of historical records related to a specific point of interest by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the point of interest to retrieve related historical records
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of historical records related to the point of interest
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalRecordsResponse"
+              example:
+                id: "https://demo-timemachine.epfl.ch/api/poi/68a0b3a8-5fce-5704-adb1-85d59e5e765a/hr?page=1"
+                total: 1
+                per_page: 100
+                current_page: 1
+                last_page: 1
+                next: null
+                previous: null
+                items:
+                  - uuid: "7e03f0c5-875f-574d-a823-ab6e5ed90e63"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range:
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "000069c0-4a54-5f04-a6f4-2807d59492a1"
+                    metadata:
+                      owner_name: "Scola della Carità"
+                      owner_code: "ent_SCL_GRD"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: "SCOLA DELLA CARITA"
+                      owner_entity_group: "SCUOLA GRANDE DELLA CARITA"
+                      owner_first_name: ""
+                      owner_family_name: ""
+                      owner_family_group: ""
+                      owner_title: ""
+                      owner_title_std: ""
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Bortolo Tomasi"
+                      function: "Casa"
+                      an_rendi: 36
+                      id_napo: 5740
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Francesca"
+                      place: "Calle di Ca' Venier"
+                      parish: "Santi Apostoli"
+                      sestiere: "CN"
+                      uid: "APT-0070"
+                      path_img: "436_Cannaregio/8_SSApostoli/SSApostoli_9_69.png"
+  /obs/{uuid}/hr:
+    get:
+      tags:
+        - Historical Records
+      summary: List historical records related to an observation
+      description: Retrieve a list of historical records related to a specific observation by its UUID
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: The UUID of the observation to retrieve related historical records
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A list of historical records related to the observation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalRecordsResponse"
+              example:
+                id: "https://demo-timemachine.epfl.ch/api/obs/000069c0-4a54-5f04-a6f4-2807d59492a1/hr?page=1"
+                total: 1
+                per_page: 100
+                current_page: 1
+                last_page: 1
+                next: null
+                previous: null
+                items:
+                  - uuid: "7e03f0c5-875f-574d-a823-ab6e5ed90e63"
+                    dataset_id: "711a79f7-b7d5-59b4-8dec-49f7857c1525"
+                    rde_type: "hr"
+                    type: "apprenticeship"
+                    time_range:
+                      - "1740-01-01"
+                      - "1740-12-31"
+                    paradata: "m"
+                    documents:
+                      - "000069c0-4a54-5f04-a6f4-2807d59492a1"
+                    metadata:
+                      owner_name: "Scola della Carità"
+                      owner_code: "ent_SCL_GRD"
+                      owner_count: 1
+                      owner_count_remark: ""
+                      owner_entity: "SCOLA DELLA CARITA"
+                      owner_entity_group: "SCUOLA GRANDE DELLA CARITA"
+                      owner_first_name: ""
+                      owner_family_name: ""
+                      owner_family_group: ""
+                      owner_title: ""
+                      owner_title_std: ""
+                      owner_mestiere: ""
+                      owner_mestiere_std: ""
+                      ten_name: "Bortolo Tomasi"
+                      function: "Casa"
+                      an_rendi: 36
+                      id_napo: 5740
+                      quantity_income: "nan"
+                      quality_income: "nan"
+                      author: "Francesca"
+                      place: "Calle di Ca' Venier"
+                      parish: "Santi Apostoli"
+                      sestiere: "CN"
+                      uid: "APT-0070"
+                      path_img: "436_Cannaregio/8_SSApostoli/SSApostoli_9_69.png"
   /geometries:
     get:
       tags:
