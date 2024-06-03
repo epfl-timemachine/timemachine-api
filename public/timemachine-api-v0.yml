@@ -180,8 +180,8 @@ paths:
     get:
       tags:
         - Points of Interest
-      summary: Fetch POIs based on their position
-      description: Retrieve points of interest within a specified bounding box (bbox)
+      summary: Fetch POIs based on their position and time range
+      description: Retrieve points of interest within a specified bounding box (bbox) and time range
       parameters:
         - name: bbox
           in: query
@@ -190,9 +190,23 @@ paths:
           schema:
             type: string
             example: "12.334753,45.436846,12.342332,45.433338"
+        - name: not_before
+          in: query
+          required: true
+          description: The start date filter for the points of interest, formatted as `YYYYMMDD`
+          schema:
+            type: string
+            example: "17000101"
+        - name: not_after
+          in: query
+          required: true
+          description: The end date filter for the points of interest, formatted as `YYYYMMDD`
+          schema:
+            type: string
+            example: "18000101"
       responses:
         "200":
-          description: A collection of points of interest within the specified bbox
+          description: A collection of points of interest within the specified bbox and time range
           content:
             application/json:
               schema:
@@ -202,50 +216,56 @@ paths:
                 crs:
                   type: "name"
                   properties:
-                    name: "urn:ogc:def:crs:OGC:1.3:CRS84"
+                    name: "urn:ogc:def:crs:EPSG::3857"
                 features:
                   - type: "Feature"
                     properties:
-                      uuid: "32f348cb-a4a3-543f-b026-6d25f75e3358"
+                      uuid: "64bb0150-dd3c-5a64-a744-484ecaa20edb"
                       rde_type: "poi"
                       time_range:
-                        - "1620-07-15"
-                        - "1620-07-15"
+                        - "17400101"
+                        - "17401231"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
                       contains:
-                        - "bf4b5d08-b9b0-5710-827c-229dae95d5d7"
+                        - "a16234ff-8531-55f8-82dd-3f28bfde0b82"
                     geometry:
                       type: "Point"
                       coordinates:
-                        - 12.337151
-                        - 45.433645
+                        - 1373938.0377939525
+                        - 5690148.383265198
                   - type: "Feature"
                     properties:
-                      uuid: "35f76aff-f9a4-5a87-8241-dc8b64d19fb7"
+                      uuid: "f73008ad-3428-56d9-80dd-d5e329761e98"
                       rde_type: "poi"
                       time_range:
-                        - "1621-01-10"
-                        - "1621-01-10"
+                        - "17400101"
+                        - "17401231"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
                       contains:
-                        - "6db108c1-b89b-518a-8f73-3a166c9fa1a9"
+                        - "d3e1b003-bb7c-5e9b-ba8f-8b836d66f1ae"
                     geometry:
                       type: "Point"
                       coordinates:
-                        - 12.337151
-                        - 45.433645
+                        - 1373938.2456825778
+                        - 5690142.076901313
                   - type: "Feature"
                     properties:
-                      uuid: "516a9566-2a36-5749-83ac-ad7e08ef84cc"
+                      uuid: "48a57a13-0ad0-505e-b773-c4825c5ebaa2"
                       rde_type: "poi"
                       time_range:
-                        - "1606-07-24"
-                        - "1606-07-24"
+                        - "17400101"
+                        - "17401231"
+                      start_date: "1740-01-01T00:00:00+00:00"
+                      end_date: "1740-12-31T00:00:00+00:00"
                       contains:
-                        - "0ad48718-f0cf-5d7d-96de-653b575f2572"
+                        - "119a40e0-4f48-5777-bed4-4ef20e7019ed"
                     geometry:
                       type: "Point"
                       coordinates:
-                        - 12.337151
-                        - 45.433645
+                        - 1373106.621759336
+                        - 5690253.051487133
   /obs:
     get:
       tags:
